@@ -2,10 +2,9 @@
   "name": "callable-instance",
   "version": "1.0.0",
   "description": "Instances of classes which are directly callable as functions.",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
-    "test": "grunt test",
-    "prepublish": "grunt build"
+    "test": "grunt test"
   },
   "keywords": [
     "instance",
@@ -17,11 +16,6 @@
   "author": "Ryan Patterson",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-plugin-transform-flow-strip-types": "^6.18.0",
-    "babel-register": "^6.18.0",
-    "chai": "^3.5.0",
-    "flow-bin": "^0.33.0",
     "grunt": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-exec": "^1.0.1",

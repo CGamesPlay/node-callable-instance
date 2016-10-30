@@ -9,19 +9,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     exec: {
       clear: 'clear',
-      flow: './node_modules/.bin/flow --color always',
       mocha: './node_modules/.bin/mocha -c -R progress 2>&1',
-      build: './node_modules/.bin/babel src --out-dir dist',
     },
     watch: {
-      flow: {
-        files: code_files.concat(mocha_files),
-        tasks: [ 'exec:clear', 'exec:flow' ],
-        options: {
-          spawn: false,
-          atBegin: true,
-        }
-      },
       mocha: {
         files: code_files.concat(mocha_files),
         tasks: [ 'exec:clear', 'exec:mocha' ],
@@ -33,7 +23,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('test', [ 'exec:flow', 'exec:mocha' ]);
+  grunt.registerTask('test', [ 'exec:mocha' ]);
   grunt.registerTask('build', [ 'exec:build' ]);
   grunt.registerTask('default', [ 'test' ]);
 
