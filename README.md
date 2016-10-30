@@ -1,5 +1,7 @@
 # node-callable-instance
 
+[![Build Status](https://travis-ci.org/CGamesPlay/node-callable-instance.svg?branch=master)](https://travis-ci.org/CGamesPlay/node-callable-instance)
+
 This module allows you to create an ES6 class that is callable as a function. The invocation is sent to one of the object's normal prototype methods.
 
 ## Installation
