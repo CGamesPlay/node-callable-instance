@@ -1,6 +1,6 @@
 // @flow
 var expect = require('chai').expect;
-var CallableInstance = require('../index');
+var CallableInstance = require('../src/index');
 
 declare function describe(x: string, f: () => void): void;
 declare function it(x: string, f: () => void): void;

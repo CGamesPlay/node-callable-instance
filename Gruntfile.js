@@ -11,6 +11,7 @@ module.exports = function(grunt) {
       clear: 'clear',
       flow: './node_modules/.bin/flow --color always',
       mocha: './node_modules/.bin/mocha -c -R progress 2>&1',
+      build: './node_modules/.bin/babel src --out-dir dist',
     },
     watch: {
       flow: {
@@ -33,6 +34,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('test', [ 'exec:flow', 'exec:mocha' ]);
+  grunt.registerTask('build', [ 'exec:build' ]);
   grunt.registerTask('default', [ 'test' ]);
 
 };
