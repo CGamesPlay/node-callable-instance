@@ -1,20 +1,17 @@
 {
   "name": "callable-instance",
-  "version": "1.0.0",
-  "description": "Instances of classes which are directly callable as functions.",
+  "version": "1.0.1",
+  "description":
+    "Instances of classes which are directly callable as functions.",
   "repository": "CGamesPlay/node-callable-instance",
   "main": "index.js",
   "scripts": {
     "test": "grunt test"
   },
-  "keywords": [
-    "instance",
-    "function",
-    "object",
-    "class",
-    "callable"
-  ],
-  "bugs": { "url": "https://github.com/CGamesPlay/node-callable-instance/issues" },
+  "keywords": ["instance", "function", "object", "class", "callable"],
+  "bugs": {
+    "url": "https://github.com/CGamesPlay/node-callable-instance/issues"
+  },
   "author": "Ryan Patterson",
   "license": "MIT",
   "devDependencies": {
