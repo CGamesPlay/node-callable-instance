@@ -4,7 +4,9 @@ node_js:
   - "12"
   - "11"
   - "10"
-  - "9"
   - "8"
-  - "7"
   - "6"
+# No reason to believe the package doesn't work on these versions, but the test
+# framework refuses to run on them.
+#  - "9"
+#  - "7"
