@@ -14,7 +14,7 @@ npm install callable-instance
 
 `ExampleClass` instances have all of the normal properties and methods, but are actually functions as well.
 
-```
+```javascript
 var CallableInstance = require('callable-instance');
 
 class ExampleClass extends CallableInstance {
@@ -25,7 +25,7 @@ class ExampleClass extends CallableInstance {
   }
 
   instanceMethod() {
-    console.log("instanceMethod called!");
+    console.log('instanceMethod called!');
   }
 }
 
@@ -36,7 +36,17 @@ test.instanceMethod();
 test();
 // The instance is actually a closure bound to itself and can be used like a
 // normal function.
-test.apply(null, [ 1, 2, 3 ]);
+test.apply(null, [1, 2, 3]);
+```
+
+For TypeScript, you need to tell pass the class itself as a parameter to the `CallableInstance` generic class:
+
+```typescript
+import { CallableInstance } from 'callable-instance';
+
+class ExampleClass extends CallableInstance<ExampleClass> {
+  // ...
+}
 ```
 
 ### Inherited Properties
@@ -47,9 +57,9 @@ Libraries that accept functions will expect that they behave as Function objects
 
 This can also cause problems if your derived class wants to have a `name` or `length` property, which are built-in properties and not configurable by default. You can have your class disable the built-in descriptors of these properties to make them available for your use.
 
-```
+```javascript
 var test = new ExampleClass();
-test.name = "hello!"
+test.name = 'hello!';
 console.log(test.name); // Will print 'instanceMethod'
 
 class NameableClass extends CallableInstance {
@@ -59,7 +69,7 @@ class NameableClass extends CallableInstance {
       value: void 0,
       enumerable: true,
       writeable: true,
-      configurable: true
+      configurable: true,
     });
   }
 
@@ -69,7 +79,7 @@ class NameableClass extends CallableInstance {
 }
 
 test = new NameableClass();
-test.name = "hello!";
+test.name = 'hello!';
 console.log(test.name); // Will print 'hello!'
 ```
 
