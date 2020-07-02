@@ -39,7 +39,7 @@ test();
 test.apply(null, [1, 2, 3]);
 ```
 
-`CallableInstance` is a generic class, so in **TypeScript** project be sure to provide your class to generic argument of `CallableInstance<T>`.
+For TypeScript, you need to tell pass the class itself as a parameter to the `CallableInstance` generic class:
 
 ```typescript
 import { CallableInstance } from 'callable-instance';
