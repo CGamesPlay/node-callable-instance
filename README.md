@@ -15,17 +15,17 @@ npm install callable-instance
 `ExampleClass` instances have all of the normal properties and methods, but are actually functions as well.
 
 ```javascript
-var CallableInstance = require('callable-instance');
+var CallableInstance = require("callable-instance");
 
 class ExampleClass extends CallableInstance {
   constructor() {
     // CallableInstance accepts the name of the property to use as the callable
     // method.
-    super('instanceMethod');
+    super("instanceMethod");
   }
 
   instanceMethod() {
-    console.log('instanceMethod called!');
+    console.log("instanceMethod called!");
   }
 }
 
@@ -39,13 +39,19 @@ test();
 test.apply(null, [1, 2, 3]);
 ```
 
-For TypeScript, you need to tell pass the class itself as a parameter to the `CallableInstance` generic class:
+For TypeScript, you need to supply the arguments and return value of the function. Note that the types specified may differ from the argument and return value types of the target method; this is an error due to a limitation of TypeScript.
 
 ```typescript
-import { CallableInstance } from 'callable-instance';
+import * as CallableInstance from "callable-instance";
 
-class ExampleClass extends CallableInstance<ExampleClass> {
-  // ...
+class ExampleClass extends CallableInstance<[number], string> {
+  constructor() {
+    super("instanceMethod");
+  }
+
+  instanceMethod(input: number): string {
+    return `${input}`;
+  }
 }
 ```
 
@@ -59,13 +65,13 @@ This can also cause problems if your derived class wants to have a `name` or `le
 
 ```javascript
 var test = new ExampleClass();
-test.name = 'hello!';
+test.name = "hello!";
 console.log(test.name); // Will print 'instanceMethod'
 
 class NameableClass extends CallableInstance {
   constructor() {
-    super('instanceMethod');
-    Object.defineProperty(this, 'name', {
+    super("instanceMethod");
+    Object.defineProperty(this, "name", {
       value: void 0,
       enumerable: true,
       writeable: true,
@@ -79,7 +85,7 @@ class NameableClass extends CallableInstance {
 }
 
 test = new NameableClass();
-test.name = 'hello!';
+test.name = "hello!";
 console.log(test.name); // Will print 'hello!'
 ```
 

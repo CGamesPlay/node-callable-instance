@@ -1,5 +1,8 @@
-export declare const CallableInstance: ICallableInstance;
-export interface ICallableInstance {
-	new <T>(property: string | symbol): (...argv) => T;
-	<T>(...argv: any[]): T;
+type Func<Args extends unknown[], Return> = (...argv: Args) => Return;
+interface ICallableInstance {
+  // prettier-ignore
+  new <Args extends unknown[], Return>(property: string | symbol):
+    Func<Args, Return>;
 }
+declare const CallableInstance: ICallableInstance;
+export = CallableInstance;
