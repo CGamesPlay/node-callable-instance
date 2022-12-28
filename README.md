@@ -1,6 +1,6 @@
 # node-callable-instance
 
-[![Build Status](https://travis-ci.org/CGamesPlay/node-callable-instance.svg?branch=master)](https://travis-ci.org/CGamesPlay/node-callable-instance) ![Download Size](https://img.shields.io/bundlephobia/min/callable-instance.svg?style=flat) [![dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)](https://www.npmjs.com/package/callable-instance?activeTab=dependencies) [![npm](https://img.shields.io/npm/v/callable-instance)](https://www.npmjs.com/package/callable-instance) ![npm](https://img.shields.io/npm/dw/callable-instance)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/CGamesPlay/node-callable-instance/node.js.yml?branch=master)](https://github.com/CGamesPlay/node-callable-instance/actions/workflows/node.js.yml) [![Download Size](https://img.shields.io/bundlephobia/min/callable-instance.svg?style=flat)](https://bundlephobia.com/package/callable-instance@latest) [![dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)](https://www.npmjs.com/package/callable-instance?activeTab=dependencies) [![npm](https://img.shields.io/npm/v/callable-instance)](https://www.npmjs.com/package/callable-instance) [![npm](https://img.shields.io/npm/dw/callable-instance)](https://www.npmjs.com/package/callable-instance)
 
 This module allows you to create an ES6 class that is callable as a function. The invocation is sent to one of the object's normal prototype methods.
 
