@@ -6,7 +6,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha -c -R progress"
+    "test": "mocha"
   },
   "keywords": [
     "instance",
@@ -21,7 +21,8 @@
   "author": "Ryan Patterson",
   "license": "MIT",
   "devDependencies": {
-    "mocha": "^8.0.1"
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.1"
   },
   "files": [
     "index.js",
