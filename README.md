@@ -1,6 +1,6 @@
 # node-callable-instance
 
-[![Build Status](https://travis-ci.org/CGamesPlay/node-callable-instance.svg?branch=master)](https://travis-ci.org/CGamesPlay/node-callable-instance) ![Dependencies](https://img.shields.io/david/cgamesplay/node-callable-instance.svg?style=flat) ![Download Size](https://img.shields.io/bundlephobia/min/callable-instance.svg?style=flat) [![npm](https://img.shields.io/npm/v/callable-instance)](https://www.npmjs.com/package/callable-instance) ![npm](https://img.shields.io/npm/dw/callable-instance)
+[![Build Status](https://travis-ci.org/CGamesPlay/node-callable-instance.svg?branch=master)](https://travis-ci.org/CGamesPlay/node-callable-instance) ![Download Size](https://img.shields.io/bundlephobia/min/callable-instance.svg?style=flat) [![dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)](https://www.npmjs.com/package/callable-instance?activeTab=dependencies) [![npm](https://img.shields.io/npm/v/callable-instance)](https://www.npmjs.com/package/callable-instance) ![npm](https://img.shields.io/npm/dw/callable-instance)
 
 This module allows you to create an ES6 class that is callable as a function. The invocation is sent to one of the object's normal prototype methods.
 
@@ -12,10 +12,12 @@ npm install callable-instance
 
 ## Usage
 
-`ExampleClass` instances have all of the normal properties and methods, but are actually functions as well.
+In the following example, we will create an `ExampleClass` class. The instances have all of the normal properties and methods, but are actually functions as well.
 
 ```javascript
-var CallableInstance = require("callable-instance");
+import CallableInstance from "callable-instance";
+// If you aren't using ES modules, you can use require:
+// var CallableInstance = require("callable-instance");
 
 class ExampleClass extends CallableInstance {
   constructor() {
@@ -39,10 +41,10 @@ test();
 test.apply(null, [1, 2, 3]);
 ```
 
-For TypeScript, you need to supply the arguments and return value of the function. Note that the types specified may differ from the argument and return value types of the target method; this is an error due to a limitation of TypeScript.
+TypeScript is also supported. `CallableInstance` is generic, accepting a tuple of arguments and a return type.
 
 ```typescript
-import * as CallableInstance from "callable-instance";
+import CallableInstance from "callable-instance";
 
 class ExampleClass extends CallableInstance<[number], string> {
   constructor() {
@@ -54,6 +56,9 @@ class ExampleClass extends CallableInstance<[number], string> {
   }
 }
 ```
+
+Note that the types specified may differ from the argument and return value types of the target method; this is an error due to a limitation of TypeScript.
+
 
 ### Inherited Properties
 
