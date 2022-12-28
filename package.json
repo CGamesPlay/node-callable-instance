@@ -6,7 +6,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && tsc"
   },
   "keywords": [
     "instance",
@@ -21,8 +21,11 @@
   "author": "Ryan Patterson",
   "license": "MIT",
   "devDependencies": {
+    "@types/mocha": "^10.0.1",
     "mocha": "^10.2.0",
-    "prettier": "^2.8.1"
+    "prettier": "^2.8.1",
+    "ts-expect": "^1.3.0",
+    "typescript": "^4.9.4"
   },
   "files": [
     "index.js",

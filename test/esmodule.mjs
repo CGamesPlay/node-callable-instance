@@ -1,5 +1,3 @@
-"use strict";
-
 import assert from "assert";
 import CallableInstance from "../index.js";
 
@@ -14,7 +12,7 @@ class MyTest extends CallableInstance {
   }
 }
 
-describe("callable-instance", function () {
+describe("CallableInstance (mjs)", function () {
   it("is callable", function () {
     assert(new MyTest("testing")() === "testing");
     assert(new MyTest()("arg") === "arg");
