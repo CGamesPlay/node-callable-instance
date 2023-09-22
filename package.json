@@ -1,19 +1,22 @@
 {
   "name": "callable-instance",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Instances of classes which are directly callable as functions.",
   "repository": "CGamesPlay/node-callable-instance",
-  "main": "index.js",
+  "main": "dist/index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "mocha && tsc"
+    "build": "rm -rf ./dist && tsc",
+    "test": "mocha src/test && tsc"
   },
   "keywords": [
     "instance",
     "function",
     "object",
     "class",
-    "callable"
+    "callable",
+    "callable-instance",
+    "JS Callable Object"
   ],
   "bugs": {
     "url": "https://github.com/CGamesPlay/node-callable-instance/issues"
