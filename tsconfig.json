@@ -5,6 +5,7 @@
         "outDir": "dist/mjs",
         "target": "es6",
         /// for cjs - tsconfig-cjs.json ///
+        "removeComments": true,
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "baseUrl": "src",
