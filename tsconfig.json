@@ -1,27 +1,34 @@
 {
     "compilerOptions": {
-        "outDir": "./dist",
+        /// for cjs - tsconfig-cjs.json ///
+        "module": "es6",
+        "outDir": "dist/mjs",
         "target": "es6",
+        /// for cjs - tsconfig-cjs.json ///
         "allowJs": true,
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "esModuleInterop": true,
-        "noImplicitAny": false,
-        "removeComments": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "src",
         "declaration": false,
-        "sourceMap": true,
+        "esModuleInterop": true,
+        "inlineSourceMap": false,
+        "listEmittedFiles": false,
+        "listFiles": false,
+        "moduleResolution": "node",
+        "pretty": true,
+        "rootDir": "src",
+        "skipLibCheck": true,
+        "strict": true,
+        "traceResolution": false,
         "typeRoots": [
-            "node_modules/@types", "src/types"
+            "node_modules/@types", "lib"
         ]
     },
-    "include": [
-        "src"
-    ],
+    "include": [ "src" ],
     "exclude": [
         "test",
         "src/types",
         "src/test",
         "lib",
-        "node_modules"
+        "node_modules",
     ]
 }

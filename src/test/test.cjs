@@ -1,10 +1,10 @@
-import assert from "assert";
-import  C, { CALL } from '../../dist/index.js'
-
-const Callable = C.default
+var assert = require("assert");
+var _ = require("callable-instance");
+var Callable = _.default
+var CALL = _.CALL
 
 function getTitle(Class, isDefault) {
-  return `${Class.name}${isDefault ? ' default' : ''} (mjs)`
+  return `${Class.name}${isDefault ? ' default' : ''} (cjs)`
 }
 
 describe(getTitle(Callable) + ' Callable Class Test', function () {

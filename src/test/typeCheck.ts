@@ -1,8 +1,7 @@
 import { expectType } from "ts-expect";
+import Callable, { CALL, OverrideCall } from "callable-instance";
 
-import Callable, { CALL, RedefineCall } from "callable-instance";
-
-class RepeaterWithFuncGeneric extends Callable<(x: string) => string, 'go'> {
+class RepeaterWithFuncGeneric extends Callable<(x: string) => string, 'go'>{
   constructor(public count: number) {
     super('go');
   }
@@ -56,7 +55,7 @@ class RepeaterWithCALL extends Callable<typeof RepeaterWithCALL> {
   }
 }
 
-class RepeaterWithTest extends Callable<(arg: 'test') => string> {
+class RepeaterWithTest extends Callable<{ (arg: 'test'): string, (arg: number): number, ttt: 't' }> {
   constructor(public count: number) {
     super();
   }
@@ -73,7 +72,8 @@ class RepeaterWithTest extends Callable<(arg: 'test') => string> {
 
 const test23 = new RepeaterWithTest(23)
 const ggg = test23('test')
-
+test23(23)
+test23.ttt
 const test = new RepeaterWithCALL(4)
 test.go('23')
 // const TTTTTT = test.CALL
@@ -198,6 +198,7 @@ class TestCallable extends Callable<typeof TestCallable, 'test'>{
   constructor() {
     super('test')
   }
+  static readonly t = 'ttt'
 
   test() {
     return 'test'
@@ -206,14 +207,30 @@ class TestCallable extends Callable<typeof TestCallable, 'test'>{
 
 const testst = new TestCallable()
 
-class TestCallableExtends extends (TestCallable as RedefineCall)<typeof TestCallableExtends, typeof TestCallable, 'test'>{
+class TestCallableExtends extends (TestCallable as OverrideCall<typeof TestCallable>)<typeof TestCallableExtends, 'go34'>{
+  constructor() {
+    super()
+  }
+  go34(){
+    return 23
+  }
+  test() {
+    return '23'
+  }
+}
+
+class TestCallableExtendsS extends (TestCallable as OverrideCall<typeof TestCallable>)<typeof TestCallableExtendsS, 'test'>{
   constructor() {
     super()
   }
   test() {
-    return 23
+    return 'test'
   }
 }
+
+const tttttttt = TestCallableExtends.t
+const ttttttt2t = TestCallableExtendsS.t
+// TestCallableExtendsS.t = 2
 
 const newewe = new TestCallableExtends()
 newewe.test()

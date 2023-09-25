@@ -2,12 +2,14 @@ declare module 'callable-instance' {
     export const CALL: unique symbol;
     export type SCALL = typeof CALL
 
-    type BaseProperty = symbol | string;
+    type BaseProperty = symbol | string | number;
     type CustomProperty = Exclude<BaseProperty, SCALL>;
 
     type BaseFunc = (...args: any) => any;
     type BaseClass = abstract new (...args: any) => any;
-    type BaseInterface = Record<BaseProperty, any>;
+    type BaseInterface = {
+        [k: BaseProperty]: any
+    };
 
     type ExtractFuncFromInterface<I extends BaseInterface, P extends BaseProperty> = I[P] extends BaseFunc ? I[P] : never;
 
@@ -16,22 +18,24 @@ declare module 'callable-instance' {
         (...args: Parameters<InstanceType<C>[P]>): ReturnType<InstanceType<C>[P]>;
     }
 
-    type ExtractFunc<C extends BaseClass | BaseFunc | BaseInterface, P extends BaseProperty> = C extends BaseFunc
-        ? C
-        : C extends BaseClass
+    type ExtractFunc<C extends BaseClass | BaseFunc | BaseInterface, P extends BaseProperty> = C extends BaseClass
         ? CloneFuncFromClass<C, P>
-        : ExtractFuncFromInterface<C, P>;
+        : C extends BaseFunc
+        ? C
+        : C extends BaseInterface
+        ? ExtractFuncFromInterface<C, P>
+        : never
 
     export interface CallableConstructor {
-        get CALL(): SCALL;
+        readonly CALL: SCALL;
         new <C extends BaseClass | BaseFunc | BaseInterface, P extends CustomProperty>(property: P): ExtractFunc<C, P>;
         new <C extends BaseClass | BaseFunc | BaseInterface>(): ExtractFunc<C, SCALL>;
     }
 
-    export interface RedefineCall {
-        new <Parent extends BaseClass | BaseFunc | BaseInterface, C extends BaseClass, P extends BaseProperty = SCALL>(...args: ConstructorParameters<C>):
-            Omit<InstanceType<C>, P> & ExtractFunc<Parent, P>;
-    }
+    export type OverrideCall<S extends BaseClass> = {
+        new <C extends BaseClass | BaseFunc | BaseInterface, P extends BaseProperty = SCALL>(...args: ConstructorParameters<S>):
+            Pick<InstanceType<S>, BaseProperty> & ExtractFunc<C, P>
+    } & Omit<S, 'new'>
 
     const Callable: CallableConstructor;
     export default Callable;
