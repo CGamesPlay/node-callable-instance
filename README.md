@@ -51,7 +51,7 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 
-### Typescript
+## Typescript
 
 
 `Callable` has full typescript support.
@@ -61,7 +61,7 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```typescript
 // Callable has 2 generics
 // 1st is for class | interface | function (for extracting type of call signature)
-// 2nd is for propertyName (string | symbol | number). defaults to Callable.CALL
+// 2nd optional generic is for propertyName (string | symbol | number). defaults to Callable.CALL
 
 interface IExampleClass {
   [Callable.CALL]<A: unknown>(arg: A): A
@@ -102,7 +102,7 @@ class ExampleClass extends Callable<typeof ExampleClass> {
 ```
 > **_NOTE:_**  For function overload or generics use Interface or Function variant.
 
-#### Override Call
+### **Override Call**
 
 Due to typescript limitations module also provides OverrideCall type.
 It can be used to override call signature in child classes.
@@ -110,8 +110,9 @@ It can be used to override call signature in child classes.
 ```typescript
 // Override call has 3 generics but must be written only in one way
 // class Child extends (Parent as OverrideCall<typeof Parent>)<Child, propertyName>
-// Child can be interface | class | function (for extracting type of new call signature)
-// propertyName can be string | symbol | number. defaults to Callable.CALL
+// 1st generic is always Parent
+// 2nd generic is Child. Can be interface | class | function
+// 3rd optional generic is propertyName can be string | symbol | number. defaults to Callable.CALL
 
 class ExampleClass extends Callable<() => string> {
   constructor() {
