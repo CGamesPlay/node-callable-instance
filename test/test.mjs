@@ -1,10 +1,8 @@
-var assert = require("assert");
-var _ = require("callable-instance");
-var Callable = _.default;
-var CALL = _.CALL;
+import assert from "assert";
+import Callable from "callable-instance";
 
 function getTitle(Class, isDefault) {
-  return `${Class.name}${isDefault ? " default" : ""} (cjs)`;
+  return `${Class.name}${isDefault ? " default" : ""} (mjs)`;
 }
 
 describe(getTitle(Callable) + " Callable Class Test", function () {
@@ -12,9 +10,6 @@ describe(getTitle(Callable) + " Callable Class Test", function () {
     assert(new Callable() instanceof Object);
     assert(new Callable() instanceof Function);
     assert(new Callable() instanceof Callable);
-  });
-  it("Callable.CALL symbol is equal to CALL symbol", function () {
-    assert(Callable.CALL === CALL);
   });
 });
 
@@ -147,9 +142,6 @@ class MyTestWithCall extends Callable {
   [Callable.CALL](arg) {
     return this.go(arg);
   }
-  [CALL](arg) {
-    return this.go(arg);
-  }
 }
 
 defaultTest(MyTestWithCall);
@@ -162,20 +154,20 @@ describe(getTitle(MyTestWithCall), function () {
     const test = new MyTestWithCall("testing");
     assert(test() === "testing");
     assert(test.go() === "testing");
-    assert(test[CALL]() === "testing");
+    assert(test[Callable.CALL]() === "testing");
     assert(test[Callable.CALL]() === "testing");
     test.message = "new message";
     assert(test() === "new message");
     assert(test.go() === "new message");
-    assert(test[CALL]() === "new message");
+    assert(test[Callable.CALL]() === "new message");
     assert(test[Callable.CALL]() === "new message");
     test.go = () => "different";
     assert(test.go() === "different");
-    assert(test[CALL]() === "different");
     assert(test[Callable.CALL]() === "different");
-    test[CALL] = () => "called";
+    assert(test[Callable.CALL]() === "different");
+    test[Callable.CALL] = () => "called";
     assert(test.go() === "different");
-    assert(test[CALL]() === "called");
+    assert(test[Callable.CALL]() === "called");
     assert(test[Callable.CALL]() === "called");
     assert(test.message === "new message");
   });
@@ -198,16 +190,10 @@ describe(getTitle(MyTestWithCall), function () {
     };
     assert(obj() === MyTestWithCall);
     assert(obj.go() === MyTestWithCall);
-    obj[CALL] = function () {
+    obj[Callable.CALL] = function () {
       return "check";
     };
     assert(obj() === "check");
     assert(obj.go() === MyTestWithCall);
-  });
-  it("has only one [Callable.CALL] method", function () {
-    assert(
-      MyTestWithCall[CALL] === MyTestWithCall[Callable.CALL] &&
-        Callable.CALL === CALL
-    );
   });
 });
