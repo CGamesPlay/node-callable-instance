@@ -37,7 +37,8 @@ test();
 // normal function.
 test.apply(null, [1, 2, 3]);
 ```
-Usage of custom method name is also supported
+> **_NOTE:_**  Usage of custom method name is also supported.
+
 ```javascript
 class ExampleClassWithCustomMethodName extends Callable {
     constructor(){
@@ -49,24 +50,88 @@ class ExampleClassWithCustomMethodName extends Callable {
 }
 ```
 
-TypeScript is also supported. `CallableInstance` is generic, accepting a tuple of arguments and a return type.
+
+### Typescript
+
+
+`Callable` has full typescript support.
+
+1. **Using interface**
 
 ```typescript
-import CallableInstance from "callable-instance";
+// Callable has 2 generics
+// 1st is for class | interface | function (for extracting type of call signature)
+// 2nd is for propertyName (string | symbol | number). defaults to Callable.CALL
 
-class ExampleClass extends CallableInstance<[number], string> {
-  constructor() {
-    super("instanceMethod");
-  }
+interface IExampleClass {
+  [Callable.CALL]<A: unknown>(arg: A): A
+}
 
-  instanceMethod(input: number): string {
-    return `${input}`;
-  }
+class ExampleClass extends Callable<IExampleClass> implements IExampleClass {
+    constructor(){
+        super()
+    }
+    [Callable.CALL]<A: unknown>(arg: A){
+        return arg
+    }
 }
 ```
 
-Note that the types specified may differ from the argument and return value types of the target method; this is an error due to a limitation of TypeScript.
+2. **Using function type**
+```typescript
+class ExampleClass extends Callable<<A: unknown>(arg: A) => A> {
+    constructor(){
+        super()
+    }
+    [Callable.CALL]<A: unknown>(arg: A){
+        return arg
+    }
+}
+```
 
+3. **Using class type**
+```typescript
+class ExampleClass extends Callable<typeof ExampleClass> {
+    constructor(){
+        super()
+    }
+    [Callable.CALL](arg: string){
+        return arg
+    }
+}
+```
+> **_NOTE:_**  For function overload or generics use Interface or Function variant.
+
+#### Override Call
+
+Due to typescript limitations module also provides OverrideCall type.
+It can be used to override call signature in child classes.
+
+```typescript
+// Override call has 3 generics but must be written only in one way
+// class Child extends (Parent as OverrideCall<typeof Parent>)<Child, propertyName>
+// Child can be interface | class | function (for extracting type of new call signature)
+// propertyName can be string | symbol | number. defaults to Callable.CALL
+
+class ExampleClass extends Callable<() => string> {
+  constructor() {
+    super();
+  }
+  [Callable.CALL]() {
+    return "test";
+  }
+}
+
+class ExampleClassChild extends (ExampleClass as OverrideCall<typeof ExampleClass>)<() => number> {
+  constructor(){
+    super();
+  }
+
+  [Callable.CALL](){
+    return 100
+  }
+}
+```
 
 ### Inherited Properties
 
@@ -81,7 +146,7 @@ var test = new ExampleClass();
 test.name = "hello!";
 console.log(test.name); // Will print 'instanceMethod'
 
-class NameableClass extends CallableInstance {
+class NameableClass extends Callable {
   constructor() {
     super("instanceMethod");
     Object.defineProperty(this, "name", {
