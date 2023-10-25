@@ -1,5 +1,5 @@
 declare module "callable-instance" {
-  export const CALL: unique symbol;
+  const CALL: unique symbol;
   export type SCALL = typeof CALL;
 
   type BaseProperty = symbol | string | number;

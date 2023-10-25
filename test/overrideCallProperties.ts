@@ -1,7 +1,5 @@
 import { expectType } from "ts-expect";
 import Callable, {
-  CALL,
-  CallableConstructor,
   OverrideCall,
 } from "callable-instance";
 
@@ -14,7 +12,7 @@ class MyClass extends Callable<typeof MyClass> {
   public publicProperty = "public";
   public readonly readonlyProperty = "readonly" as const;
 
-  private [CALL]() {
+  private [Callable.CALL]() {
     return 32;
   }
 }
@@ -40,7 +38,7 @@ class Extended extends (MyClass as OverrideCall<typeof MyClass>)<
   public newPublicProperty = "public";
   public readonly newReadonlyProperty = "readonly" as const;
 
-  [CALL]() {
+  [Callable.CALL]() {
     return "str";
   }
 }

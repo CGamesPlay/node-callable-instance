@@ -1,5 +1,5 @@
 import { expectType } from "ts-expect";
-import Callable, { CALL, CallableConstructor, OverrideCall } from "callable-instance";
+import Callable, { CallableConstructor, OverrideCall } from "callable-instance";
 
 // TESTS FOR CLASS-TYPE GENERICS
 
