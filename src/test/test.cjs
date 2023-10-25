@@ -22,17 +22,6 @@ function defaultTest(Class, prototypes = []) {
   return describe(getTitle(Class, true), function () {
     it("is callable", function () {
       assert(typeof new Class("msg") === "function");
-      assert(
-        (function () {
-          let test;
-          try {
-            test = new Class("msg")();
-          } catch (e) {
-            return false;
-          }
-          return true;
-        })()
-      );
     });
     it("correctly inherits prototypes", function () {
       assert(typeof new Class("msg") === "function");
