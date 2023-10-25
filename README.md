@@ -134,7 +134,7 @@ class ExampleClassChild extends (ExampleClass as OverrideCall<typeof ExampleClas
 }
 ```
 
-### Inherited Properties
+## Inherited Properties
 
 All instances of CallableMethod are also an instances of [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function), and have all of Function's properties.
 
