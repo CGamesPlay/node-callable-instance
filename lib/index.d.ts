@@ -50,7 +50,6 @@ declare module "callable-instance" {
     >;
   }
 
-  // pick for omitting call signature
   type PickProperties<Obj extends Record<BaseProperty, unknown>> = {
     [k in keyof Obj]: Obj[k];
   };

@@ -2,7 +2,7 @@ import { expectType } from "ts-expect";
 import Callable, { CallableConstructor, OverrideCall } from "callable-instance";
 
 // TESTS FOR FUNCTION-TYPE GENERICS
-class RepeaterWithFuncGeneric extends Callable<(x: string)=> string, "go"> {
+class RepeaterWithFuncGeneric extends Callable<(x: string) => string, "go"> {
   constructor(public count: number) {
     super("go");
   }
@@ -129,5 +129,53 @@ describe("Callable With TS Func Override Generic and custom property (TypeScript
     );
     expectType<Function>(new RepeaterWithFuncOverride());
     expectType<Object>(new RepeaterWithFuncOverride());
+  });
+});
+
+type GenericFunc = <G extends unknown>(arg: G) => G;
+
+class RepeaterWithGenericFunc extends Callable<GenericFunc> {
+  constructor(public count: number) {
+    super();
+  }
+  [Callable.CALL]<G>(arg: G) {
+    return arg;
+  }
+}
+
+describe("Callable With Generic Function Generic and custom property (TypeScript)", function () {
+  it("is callable", function () {
+    expectType<<G extends unknown, b extends undefined>(arg: G, B: b) => G>(
+      new RepeaterWithGenericFunc(23)
+    );
+    new RepeaterWithGenericFunc(2)("testing");
+    // @ts-expect-error wrong type for method
+    new RepeaterWithGenericFunc()(5).go(5);
+    // Valid propert access.
+    new RepeaterWithGenericFunc(2).count = 4;
+  });
+
+  it("is an object", function () {
+    expectType<RepeaterWithGenericFunc>(new RepeaterWithGenericFunc(23));
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithGenericFunc(23)[Callable.CALL]
+    );
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithGenericFunc(23)
+    );
+    expectType<(x: number) => number>(
+      new RepeaterWithGenericFunc(23)[Callable.CALL]
+    );
+  });
+
+  it("is an instance of Repeater", function () {
+    // is not passed because for typescript OverrideCall is other class
+    // expectType<typeof RepeaterWithFuncOverload>(new RepeaterWithOverridenFunc());
+    expectType<RepeaterWithGenericFunc>(new RepeaterWithGenericFunc(23));
+    expectType<InstanceType<CallableConstructor>>(
+      new RepeaterWithGenericFunc(23)
+    );
+    expectType<Function>(new RepeaterWithGenericFunc(23));
+    expectType<Object>(new RepeaterWithGenericFunc(23));
   });
 });
