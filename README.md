@@ -15,30 +15,38 @@ npm install callable-instance
 In the following example, we will create an `ExampleClass` class. The instances have all of the normal properties and methods, but are actually functions as well.
 
 ```javascript
-import CallableInstance from "callable-instance";
+import Callable from "callable-instance";
 // If you aren't using ES modules, you can use require:
 // var CallableInstance = require("callable-instance");
 
-class ExampleClass extends CallableInstance {
+class ExampleClass extends Callable {
   constructor() {
-    // CallableInstance accepts the name of the property to use as the callable
-    // method.
-    super("instanceMethod");
+    super();
   }
-
-  instanceMethod() {
-    console.log("instanceMethod called!");
+  [Callable.CALL](arg) {
+    return arg
   }
 }
 
 var test = new ExampleClass();
 // Invoke the method normally
-test.instanceMethod();
+test[Callable.CALL]();
 // Call the instance itself, redirects to instanceMethod
 test();
 // The instance is actually a closure bound to itself and can be used like a
 // normal function.
 test.apply(null, [1, 2, 3]);
+```
+Usage of custom method name is also supported
+```javascript
+class ExampleClassWithCustomMethodName extends Callable {
+    constructor(){
+        super('myMethod')
+    }
+    myMethod(arg){
+        return arg
+    }
+}
 ```
 
 TypeScript is also supported. `CallableInstance` is generic, accepting a tuple of arguments and a return type.
