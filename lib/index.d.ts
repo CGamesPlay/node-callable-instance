@@ -18,7 +18,7 @@ declare module "callable-instance" {
 
   interface CloneFuncFromClass<C extends BaseClass, P extends BaseProperty> {
     /**
-     * For TS generics and function override support use interface or function type for Callable
+     * For TS generics and function overload support use interface or function type for Callable
      */
     (...args: Parameters<InstanceType<C>[P]>): ReturnType<InstanceType<C>[P]>;
   }

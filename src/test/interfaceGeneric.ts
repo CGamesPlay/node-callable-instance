@@ -50,14 +50,14 @@ describe("Callable With Interface Generic and custom property (TypeScript)", fun
   });
 });
 
-interface FuncOverride {
+interface IInterfaceOverload {
   go(x: number): number;
   go(x: string): string;
 }
 
-class RepeaterWithTSInterfaceOverride
-  extends Callable<FuncOverride, "go">
-  implements FuncOverride
+class RepeaterWithInterfaceOverload
+  extends Callable<IInterfaceOverload, "go">
+  implements IInterfaceOverload
 {
   constructor(public count: number) {
     super("go");
@@ -70,57 +70,57 @@ class RepeaterWithTSInterfaceOverride
   }
 }
 
-describe("Callable With TS Interface Override Generic and custom property (TypeScript)", function () {
+describe("Callable With TS Interface Overload Generic and custom property (TypeScript)", function () {
   it("is callable", function () {
     expectType<{ (x: string): string; (x: number): number }>(
-      new RepeaterWithTSInterfaceOverride(1)
+      new RepeaterWithInterfaceOverload(1)
     );
     // @ts-expect-error wrong type for constructor
-    new RepeaterWithTSInterfaceOverride("testing");
-    new RepeaterWithTSInterfaceOverride(5).go(5);
+    new RepeaterWithInterfaceOverload("testing");
+    new RepeaterWithInterfaceOverload(5).go(5);
     // Valid propert access.
-    new RepeaterWithTSInterfaceOverride(5).count = 4;
+    new RepeaterWithInterfaceOverload(5).count = 4;
   });
 
   it("is an object", function () {
-    expectType<RepeaterWithTSInterfaceOverride>(
-      new RepeaterWithTSInterfaceOverride(5)
+    expectType<RepeaterWithInterfaceOverload>(
+      new RepeaterWithInterfaceOverload(5)
     );
     expectType<(x: string) => string>(
-      new RepeaterWithTSInterfaceOverride(5).go
+      new RepeaterWithInterfaceOverload(5).go
     );
     expectType<{ (x: string): string; (x: number): number }>(
-      new RepeaterWithTSInterfaceOverride(5)
+      new RepeaterWithInterfaceOverload(5)
     );
     expectType<(x: string) => string>(() =>
-      new RepeaterWithTSInterfaceOverride(5)("23")
+      new RepeaterWithInterfaceOverload(5)("23")
     );
     expectType<(x: number) => number>(() =>
-      new RepeaterWithTSInterfaceOverride(5)(23)
+      new RepeaterWithInterfaceOverload(5)(23)
     );
   });
 
   it("is an instance of Repeater", function () {
-    expectType<RepeaterWithTSInterfaceOverride>(
-      new RepeaterWithTSInterfaceOverride(5)
+    expectType<RepeaterWithInterfaceOverload>(
+      new RepeaterWithInterfaceOverload(5)
     );
     expectType<InstanceType<CallableConstructor>>(
-      new RepeaterWithTSInterfaceOverride(5)
+      new RepeaterWithInterfaceOverload(5)
     );
-    expectType<Function>(new RepeaterWithTSInterfaceOverride(5));
-    expectType<Object>(new RepeaterWithTSInterfaceOverride(5));
+    expectType<Function>(new RepeaterWithInterfaceOverload(5));
+    expectType<Object>(new RepeaterWithInterfaceOverload(5));
   });
 });
 
-interface OverridenType {
+interface IInterface {
   go(): number;
 }
 
-class RepeaterWithOverridenFunc
+class RepeaterWithInterfaceOverride
   extends (RepeaterWithInterfaceGeneric as OverrideCall<
     typeof RepeaterWithInterfaceGeneric
-  >)<OverridenType, "go">
-  implements OverridenType
+  >)<IInterface, "go">
+  implements IInterface
 {
   constructor() {
     super(23);
@@ -130,32 +130,32 @@ class RepeaterWithOverridenFunc
   }
 }
 
-describe("Callable With Func Overriding Generic and custom property (TypeScript)", function () {
+describe("Callable With Interface override Generic and custom property (TypeScript)", function () {
   it("is callable", function () {
-    expectType<() => number>(new RepeaterWithOverridenFunc());
+    expectType<() => number>(new RepeaterWithInterfaceOverride());
     // @ts-expect-error wrong type for constructor
-    new RepeaterWithOverridenFunc()("testing");
+    new RepeaterWithInterfaceOverride()("testing");
     // @ts-expect-error wrong type for method
-    new RepeaterWithOverridenFunc()(5).go(5);
+    new RepeaterWithInterfaceOverride()(5).go(5);
     // Valid propert access.
-    new RepeaterWithOverridenFunc().count = 4;
+    new RepeaterWithInterfaceOverride().count = 4;
   });
 
   it("is an object", function () {
-    expectType<RepeaterWithOverridenFunc>(new RepeaterWithOverridenFunc());
-    expectType<() => number>(new RepeaterWithOverridenFunc().go);
-    expectType<() => number>(new RepeaterWithOverridenFunc());
-    expectType<(x: number) => number>(new RepeaterWithOverridenFunc().go);
+    expectType<RepeaterWithInterfaceOverride>(new RepeaterWithInterfaceOverride());
+    expectType<() => number>(new RepeaterWithInterfaceOverride().go);
+    expectType<() => number>(new RepeaterWithInterfaceOverride());
+    expectType<(x: number) => number>(new RepeaterWithInterfaceOverride().go);
   });
 
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
-    // expectType<typeof RepeaterWithTSInterfaceOverride>(new RepeaterWithOverridenFunc());
-    expectType<RepeaterWithOverridenFunc>(new RepeaterWithOverridenFunc());
+    // expectType<typeof RepeaterWithInterfaceOverload>(new RepeaterWithInterfaceOverride());
+    expectType<RepeaterWithInterfaceOverride>(new RepeaterWithInterfaceOverride());
     expectType<InstanceType<CallableConstructor>>(
-      new RepeaterWithOverridenFunc()
+      new RepeaterWithInterfaceOverride()
     );
-    expectType<Function>(new RepeaterWithOverridenFunc());
-    expectType<Object>(new RepeaterWithOverridenFunc());
+    expectType<Function>(new RepeaterWithInterfaceOverride());
+    expectType<Object>(new RepeaterWithInterfaceOverride());
   });
 });
