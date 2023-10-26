@@ -42,6 +42,7 @@ test.apply(null, [1, 2, 3]);
 ```javascript
 class ExampleClassWithCustomMethodName extends Callable {
     constructor(){
+        // in super enter object method`s name which will be used when calling object
         super('myMethod')
     }
     myMethod(arg){
@@ -55,6 +56,7 @@ In the next example, we will create `callableObject`. `Callable.makeCallable` wi
 
 ```javascript
 import Callable from "callable-instance";
+// makeCallable adds call signature to object
 const callableObject = Callable.makeCallable({
   test: "test",
   [Callable.CALL]() {
@@ -65,7 +67,7 @@ const callableObject = Callable.makeCallable({
 // cloning using spread operator. (spread looses call signature so it is important to call makeCallable again)
 const cloned = Callable.makeCallable({...callableObject});
 
-// cloning using Callable.clone way (accepts only direct instance of Callable. e.g. made with makeCallable)
+// cloning using Callable.clone (accepts only direct instance of Callable. e.g. made with makeCallable)
 const cloned2 = Callable.clone(callableObject);
 ```
 > **_NOTE:_**  Usage of custom method name is also supported.
@@ -76,9 +78,9 @@ const callableObject = Callable.makeCallable({
   getTest() {
     return this.test;
   },
-}, "getTest");
+}, "getTest"); // second parameter is optional method`s name which will be used when calling object
 
-// but it is important to provide method name when cloning using makeCallable
+// but it is important to also provide method name when cloning using spread + makeCallable
 const cloned = Callable.makeCallable({...callableObject}, "getTest");
 
 // Callable.clone does not have this issue
@@ -95,12 +97,13 @@ const cloned2 = Callable.clone(callableObject);
 ```typescript
 // Callable has 2 generics
 // 1st is for class | interface | function (for extracting type of call signature)
-// 2nd optional generic is for propertyName (string | symbol | number). defaults to Callable.CALL
+// 2nd optional generic is for method name (string | symbol | number) which will be used as type of call signature from 1st generic (defaults to Callable.CALL)
 
 interface IExampleClass {
+  // interface type will provide actual type of the function without limits
   [Callable.CALL]<A: unknown>(arg: A): A
 }
-
+// implements is optional but advised https://www.typescriptlang.org/docs/handbook/interfaces.html
 class ExampleClass extends Callable<IExampleClass> implements IExampleClass {
     constructor(){
         super()
@@ -125,6 +128,7 @@ class ExampleClass extends Callable<<A: unknown>(arg: A) => A> {
 
 3. **Using class type**
 ```typescript
+// easiest way of typing Callable
 class ExampleClass extends Callable<typeof ExampleClass> {
     constructor(){
         super()
@@ -148,6 +152,7 @@ It can be used to override call signature in child classes.
 // 2nd generic is Child. Can be interface | class | function
 // 3rd optional generic is propertyName can be string | symbol | number. defaults to Callable.CALL
 
+// call signature is (() => string)
 class ExampleClass extends Callable<() => string> {
   constructor() {
     super();
@@ -157,6 +162,7 @@ class ExampleClass extends Callable<() => string> {
   }
 }
 
+// overriding call signature to (() => number)
 class ExampleClassChild extends (ExampleClass as OverrideCall<typeof ExampleClass>)<() => number> {
   constructor(){
     super();
@@ -171,6 +177,8 @@ class ExampleClassChild extends (ExampleClass as OverrideCall<typeof ExampleClas
 ## Inherited Properties
 
 All instances of CallableMethod are also an instances of [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function), and have all of Function's properties.
+
+Call signature behaves like the method specified in constructor but they are not equal. `Callable` just creates an alias to the function and it's this value must always be function. In fact it works like `(...a) => test.methodName(...a)`
 
 Libraries that accept functions will expect that they behave as Function objects do. For example, if you alter the semantics of the `call` or `apply` methods, library code may fail to work with your callable instance. In these cases, you can simply bind the instance method to the callable instance and pass that instead (e.g. `test.instanceMethod.bind(test)`).
 
