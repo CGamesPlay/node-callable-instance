@@ -51,7 +51,7 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 ### Other Usage Variant
-If you prefer to use regular JS objects, you can easily make them callable.
+If you prefer using regular JS objects, you can easily make them callable.
 
 ```javascript
 import Callable from "callable-instance";
