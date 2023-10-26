@@ -52,11 +52,11 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 ### Other Usage Variant
-In the next example, we will create `callableObject`. `Callable.makeCallable` will add call signature to object.
+In the next example, we will create `callableObject`. using Callable.makeCallable
 
 ```javascript
 import Callable from "callable-instance";
-// makeCallable adds call signature to object
+// makeCallable creates new callable object with all the properties from source object
 const callableObject = Callable.makeCallable({
   test: "test",
   [Callable.CALL]() {
@@ -64,7 +64,7 @@ const callableObject = Callable.makeCallable({
   },
 });
 
-// cloning using spread operator. (spread looses call signature so it is important to call makeCallable again)
+// cloning using spread operator + makeCallable. (spread looses call signature so it is important to call makeCallable again)
 const cloned = Callable.makeCallable({...callableObject});
 
 // cloning using Callable.clone (accepts only direct instance of Callable. e.g. made with makeCallable)
@@ -101,14 +101,14 @@ const cloned2 = Callable.clone(callableObject);
 
 interface IExampleClass {
   // interface type will provide actual type of the function without limits
-  [Callable.CALL]<A: unknown>(arg: A): A
+  [Callable.CALL](arg: string): string
 }
 // implements is optional but advised https://www.typescriptlang.org/docs/handbook/interfaces.html
 class ExampleClass extends Callable<IExampleClass> implements IExampleClass {
     constructor(){
         super()
     }
-    [Callable.CALL]<A: unknown>(arg: A){
+    [Callable.CALL](arg: string){
         return arg
     }
 }
@@ -116,11 +116,11 @@ class ExampleClass extends Callable<IExampleClass> implements IExampleClass {
 
 2. **Using function type**
 ```typescript
-class ExampleClass extends Callable<<A: unknown>(arg: A) => A> {
+class ExampleClass extends Callable<(arg: string) => string> {
     constructor(){
         super()
     }
-    [Callable.CALL]<A: unknown>(arg: A){
+    [Callable.CALL](arg: string){
         return arg
     }
 }
@@ -128,7 +128,7 @@ class ExampleClass extends Callable<<A: unknown>(arg: A) => A> {
 
 3. **Using class type**
 ```typescript
-// easiest way of typing Callable
+// easiest way for typing Callable
 class ExampleClass extends Callable<typeof ExampleClass> {
     constructor(){
         super()
