@@ -51,7 +51,7 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 ### Other Usage Variant
-If you prefer using regular JS objects, you can easily make them callable.
+Making regular JS objects callable.
 
 ```javascript
 import Callable from "callable-instance";
@@ -62,10 +62,10 @@ const callableObject = Callable.makeCallable({
   },
 });
 
-// if you prefer to use spread operator, for callable it will be similar. 
+// cloning using spread operator. (spread looses call signature so it is important to call makeCallable again)
 const cloned = Callable.makeCallable({...callableObject});
 
-// or you can use Callable.clone (accepts only direct instance of Callable. e.g. made with makeCallable)
+// cloning using Callable.clone way (accepts only direct instance of Callable. e.g. made with makeCallable)
 const cloned2 = Callable.clone(callableObject);
 ```
 > **_NOTE:_**  Usage of custom method name is also supported.
@@ -78,10 +78,10 @@ const callableObject = Callable.makeCallable({
   },
 }, "getTest");
 
-// but you will need to provide method name when cloning using makeCallable
+// but it is important to provide method name when cloning using makeCallable
 const cloned = Callable.makeCallable({...callableObject}, "getTest");
 
-// clone does not have this issue
+// Callable.clone does not have this issue
 const cloned2 = Callable.clone(callableObject);
 ```
 
