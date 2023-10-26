@@ -33,9 +33,6 @@ var test = new ExampleClass();
 test[Callable.CALL]();
 // Call the instance itself, redirects to instanceMethod
 test();
-// The instance is actually a closure bound to itself and can be used like a
-// normal function.
-test.apply(null, [1, 2, 3]);
 ```
 > **_NOTE:_**  Usage of custom method name is also supported.
 
