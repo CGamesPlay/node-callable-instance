@@ -42,7 +42,7 @@ test.apply(null, [1, 2, 3]);
 ```javascript
 class ExampleClassWithCustomMethodName extends Callable {
     constructor(){
-        // in super enter object method`s name which will be used when calling object
+        // in super provide object method`s name which will be used when calling object
         super('myMethod')
     }
     myMethod(arg){
