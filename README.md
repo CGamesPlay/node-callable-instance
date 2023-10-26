@@ -50,6 +50,40 @@ class ExampleClassWithCustomMethodName extends Callable {
 }
 ```
 
+### Other Usage Variant
+If you prefer to use regular JS objects, you can easily make them callable.
+
+```javascript
+import Callable from "callable-instance";
+const callableObject = Callable.makeCallable({
+  test: "test",
+  [Callable.CALL]() {
+    return this.test;
+  },
+});
+
+// if you prefer to use spread operator, for callable it will be similar. 
+const cloned = Callable.makeCallable({...callableObject});
+
+// or you can use Callable.clone (accepts only direct instance of Callable. e.g. made with makeCallable)
+const cloned2 = Callable.clone(callableObject);
+```
+> **_NOTE:_**  Usage of custom method name is also supported.
+```javascript
+import Callable from "callable-instance";
+const callableObject = Callable.makeCallable({
+  test: "test",
+  getTest() {
+    return this.test;
+  },
+}, "getTest");
+
+// but you will need to provide method name when cloning using makeCallable
+const cloned = Callable.makeCallable({...callableObject}, "getTest");
+
+// clone does not have this issue
+const cloned2 = Callable.clone(callableObject);
+```
 
 ## Typescript
 
