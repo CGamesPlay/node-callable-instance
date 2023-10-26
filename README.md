@@ -51,7 +51,7 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 ### Other Usage Variant
-Making regular JS objects callable.
+In the next example, we will create `callableObject`. `Callable.makeCallable` will add call signature to object.
 
 ```javascript
 import Callable from "callable-instance";
