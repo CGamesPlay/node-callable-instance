@@ -49,7 +49,7 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 ### Other Usage Variant
-In the next example, we will create `callableObject`. using Callable.makeCallable
+In the next example, we will create `callableObject` using Callable.makeCallable.
 
 ```javascript
 import Callable from "callable-instance";
