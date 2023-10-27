@@ -31,7 +31,7 @@ class ExampleClass extends Callable {
 var test = new ExampleClass();
 // Invoke the method normally
 test[Callable.CALL]();
-// Call the instance itself, redirects to instanceMethod
+// Call the instance itself, redirects to [Callable.CALL]
 test();
 ```
 > **_NOTE:_**  Usage of custom method name is also supported.
