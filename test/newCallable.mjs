@@ -1,11 +1,11 @@
-var assert = require("assert");
-var Callable = require("callable-instance");
+import assert from "assert";
+import Callable from "callable-instance";
 
 function getTitle(Class, isDefault) {
-  return `${Class.name}${isDefault ? " default" : ""} (cjs)`;
+  return `${Class.name}${isDefault ? " default" : ""} (mjs)`;
 }
 
-describe(getTitle(Callable) + " C Class Test", function () {
+describe(getTitle(Callable) + " Callable Class Test", function () {
   it("correctly inherits prototypes", function () {
     assert(new Callable() instanceof Object);
     assert(new Callable() instanceof Function);
@@ -33,6 +33,18 @@ function defaultTest(Class, prototypes = []) {
     });
     it("has length property set to 0 due to ...args", function () {
       assert(new Class("testing").length === 0);
+    });
+    it("has not accessible properties func, property, bound (because it returns this.bound instead of this)", function () {
+      assert(new Class("testing").func === undefined);
+      assert(new Class("testing").bound === undefined);
+      assert(
+        Object.getOwnPropertyDescriptor(new Class("testing"), "func") ===
+          undefined
+      );
+      assert(
+        Object.getOwnPropertyDescriptor(new Class("testing"), "bound") ===
+          undefined
+      );
     });
   });
 }
@@ -62,8 +74,10 @@ describe(getTitle(MyTest), function () {
     assert(test() === "new message");
     assert(test.go() === "new message");
   });
-  it("has own string tag C", function () {
-    assert(Object.prototype.toString.call(new MyTest("test")) === "[object Callable]");
+  it("has own string tag Callable", function () {
+    assert(
+      Object.prototype.toString.call(new MyTest("test")) === "[object Callable]"
+    );
   });
   it("supports property redefine", function () {
     const obj = new MyTest("testing");
@@ -105,8 +119,10 @@ describe(getTitle(MyTestExtended), function () {
     assert(test() === "new message");
     assert(test.go() === "new message");
   });
-  it("has own string tag C", function () {
-    assert(Object.prototype.toString.call(new MyTest("test")) === "[object Callable]");
+  it("has own string tag Callable", function () {
+    assert(
+      Object.prototype.toString.call(new MyTest("test")) === "[object Callable]"
+    );
   });
   it("supports property redefine", function () {
     const obj = new MyTestExtended("testing");

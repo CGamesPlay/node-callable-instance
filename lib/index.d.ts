@@ -22,7 +22,6 @@ declare module "callable-instance" {
      */
     (...args: Parameters<InstanceType<C>[P]>): ReturnType<InstanceType<C>[P]>;
   }
-
   type ExtractFunc<
     C extends BaseClass | BaseFunc | BaseInterface,
     P extends BaseProperty
@@ -35,7 +34,17 @@ declare module "callable-instance" {
     : never;
 
   export interface CallableConstructor {
-    readonly CALL: SCALL;
+    get CALL(): SCALL;
+
+    makeCallable<I extends BaseInterface, P extends CustomProperty>(
+      object: I,
+      property: P
+    ): I & ExtractFuncFromInterface<I, P>;
+    makeCallable<I extends BaseInterface>(
+      object: I
+    ): I & ExtractFuncFromInterface<I, SCALL>;
+
+    clone<C extends BaseInterface & BaseFunc>(callableObject: C): C;
 
     new <
       C extends BaseClass | BaseFunc | BaseInterface,
