@@ -110,7 +110,7 @@ It can be used to override call signature in child classes.
 ```typescript
 // Override call has 3 generics but must be written only in one way
 // class Child extends (Parent as OverrideCall<typeof Parent>)<Child, propertyName>
-// 1st generic is always Parent
+// 1st generic is Parent
 // 2nd generic is Child. Can be interface | class | function
 // 3rd optional generic is propertyName can be string | symbol | number. defaults to Callable.CALL
 
