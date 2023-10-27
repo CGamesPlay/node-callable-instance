@@ -175,7 +175,7 @@ class ExampleClassChild extends (ExampleClass as OverrideCall<typeof ExampleClas
 
 All instances of CallableMethod are also an instances of [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function), and have all of Function's properties.
 
-`Callable` behaves exactly like the method specified in constructor but they are not equal. `Callable` just creates an alias to the function. It's `bind`, `apply`, `call` methods behaves exactly like used function's methods. So you can safely use `call`, `apply` or `bind` on `Callable` directly. `test.call(test2, ...args)` will return `test.instanceMethod.call(test2, ...args)`.
+`Callable` behaves exactly like the method specified in constructor but they are not equal. `Callable` just creates an alias to the function. It's `bind`, `apply`, `call` methods behaves exactly like used function's methods. So it is safe to use `call`, `apply` or `bind` on `Callable` directly. `test.call(test2, ...args)` will return `test.instanceMethod.call(test2, ...args)`.
 
 Libraries that accept functions will expect that they behave as Function objects do. For example, if you alter the semantics of the call or apply methods, library code may fail to work with your callable instance. This can also cause problems if your derived class wants to have a `name` or `length` property, which are built-in properties and not configurable by default. You can have your class disable the built-in descriptors of these properties to make them available for your use.
 
