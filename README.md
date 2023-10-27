@@ -181,8 +181,9 @@ Libraries that accept functions will expect that they behave as Function objects
 
 ```javascript
 var test = new ExampleClass();
+console.log(test.name); // Will print 'ExampleClass' (constructor.name is used by default)
 test.name = "hello!";
-console.log(test.name); // Will print 'instanceMethod'
+console.log(test.name); // Will print 'ExampleClass'
 
 class NameableClass extends Callable {
   constructor() {
