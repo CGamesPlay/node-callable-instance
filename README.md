@@ -17,7 +17,7 @@ In the following example, we will create an `ExampleClass` class. The instances 
 ```javascript
 import Callable from "callable-instance";
 // If you aren't using ES modules, you can use require:
-// var CallableInstance = require("callable-instance");
+// var Callable = require("callable-instance");
 
 class ExampleClass extends Callable {
   constructor() {
