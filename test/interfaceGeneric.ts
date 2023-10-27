@@ -171,17 +171,19 @@ class RepeaterWithGenericInterface
   implements IGenericInterface
 {
   constructor() {
-    super('go');
+    super("go");
   }
-  public count = 23
+  public count = 23;
   go(g) {
-    return g
+    return g;
   }
 }
 
 describe("Callable With Generic Interface Generic and custom property (TypeScript)", function () {
   it("is callable", function () {
-    expectType<<G extends unknown>(arg: G) => G>(new RepeaterWithGenericInterface());
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithGenericInterface()
+    );
     new RepeaterWithGenericInterface()("testing");
     // @ts-expect-error wrong type for method
     new RepeaterWithGenericInterface()(5).go(5);
@@ -193,9 +195,15 @@ describe("Callable With Generic Interface Generic and custom property (TypeScrip
     expectType<RepeaterWithGenericInterface>(
       new RepeaterWithGenericInterface()
     );
-    expectType<<G extends unknown>(arg: G) => G>(new RepeaterWithGenericInterface().go);
-    expectType<<G extends unknown>(arg: G) => G>(new RepeaterWithGenericInterface());
-    expectType<<G extends unknown>(arg: G) => G>(new RepeaterWithGenericInterface().go);
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithGenericInterface().go
+    );
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithGenericInterface()
+    );
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithGenericInterface().go
+    );
   });
 
   it("is an instance of Repeater", function () {

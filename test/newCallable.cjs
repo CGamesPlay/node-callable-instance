@@ -28,19 +28,37 @@ function defaultTest(Class, prototypes = []) {
         assert(new Class("msg") instanceof defaultPrototypes[i]);
       }
     });
+    it("it's bind method correctly inherits prototypes", function () {
+      assert(typeof new Class("msg").bind({}) === "function");
+      const defaultPrototypes = [Object, Function, Callable, Class];
+      for (let i = 0; i !== defaultPrototypes.length; i++) {
+        assert(new Class("msg").bind({}) instanceof defaultPrototypes[i]);
+      }
+      for (let i = 0; i !== prototypes.length; i++) {
+        assert(new Class("msg").bind({}) instanceof defaultPrototypes[i]);
+      }
+    });
+    it("it's call, apply method is overriden and works exactly like [CALL].apply, [CALL].call", function () {
+      assert(typeof new Class("msg").call === "function");
+      assert(typeof new Class("msg").apply === "function");
+      const defaultPrototypes = [Object, Function];
+      for (let i = 0; i !== defaultPrototypes.length; i++) {
+        assert(new Class("msg").call instanceof defaultPrototypes[i]);
+        assert(new Class("msg").apply instanceof defaultPrototypes[i]);
+      }
+      for (let i = 0; i !== prototypes.length; i++) {
+        assert(new Class("msg").call instanceof defaultPrototypes[i]);
+        assert(new Class("msg").apply instanceof defaultPrototypes[i]);
+      }
+    });
     it("copies name property from constructor", function () {
       assert(new Class("test").name === Class.name);
     });
     it("has length property set to 0 due to ...args", function () {
       assert(new Class("testing").length === 0);
     });
-    it("has not accessible properties func, property, bound (because it returns this.bound instead of this)", function () {
-      assert(new Class("testing").func === undefined);
+    it("has not accessible properties bound (because it returns this.bound instead of this)", function () {
       assert(new Class("testing").bound === undefined);
-      assert(
-        Object.getOwnPropertyDescriptor(new Class("testing"), "func") ===
-          undefined
-      );
       assert(
         Object.getOwnPropertyDescriptor(new Class("testing"), "bound") ===
           undefined
