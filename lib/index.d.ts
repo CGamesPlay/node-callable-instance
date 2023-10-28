@@ -39,10 +39,10 @@ declare module "callable-instance" {
     makeCallable<I extends BaseInterface, P extends CustomProperty>(
       object: I,
       property: P
-    ): I & ExtractFuncFromInterface<I, P>;
+    ): PickProperties<I> & ExtractFuncFromInterface<I, P>;
     makeCallable<I extends BaseInterface>(
       object: I
-    ): I & ExtractFuncFromInterface<I, SCALL>;
+    ): PickProperties<I> & ExtractFuncFromInterface<I, SCALL>;
 
     clone<C extends BaseInterface & BaseFunc>(callableObject: C): C;
 
