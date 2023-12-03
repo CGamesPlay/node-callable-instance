@@ -122,7 +122,6 @@ describe("Callable With TS Func Override Generic and custom property (TypeScript
 
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
-    // expectType<typeof RepeaterWithFuncOverload>(new RepeaterWithOverridenFunc());
     expectType<RepeaterWithFuncOverride>(new RepeaterWithFuncOverride());
     expectType<InstanceType<CallableConstructor>>(
       new RepeaterWithFuncOverride()
@@ -170,7 +169,6 @@ describe("Callable With Generic Function Generic and custom property (TypeScript
 
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
-    // expectType<typeof RepeaterWithFuncOverload>(new RepeaterWithOverridenFunc());
     expectType<RepeaterWithGenericFunc>(new RepeaterWithGenericFunc(23));
     expectType<InstanceType<CallableConstructor>>(
       new RepeaterWithGenericFunc(23)

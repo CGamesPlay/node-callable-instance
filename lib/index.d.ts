@@ -1,9 +1,8 @@
 declare module "callable-instance" {
   const CALL: unique symbol;
-  export type SCALL = typeof CALL;
 
   type BaseProperty = symbol | string | number;
-  type CustomProperty = Exclude<BaseProperty, SCALL>;
+  type CustomProperty = Exclude<BaseProperty, typeof CALL>;
 
   type BaseFunc = (...args: any) => any;
   type BaseClass = abstract new (...args: any) => any;
@@ -34,7 +33,7 @@ declare module "callable-instance" {
     : never;
 
   export interface CallableConstructor {
-    get CALL(): SCALL;
+    get CALL(): typeof CALL;
 
     makeCallable<I extends BaseInterface, P extends CustomProperty>(
       object: I,
@@ -42,7 +41,7 @@ declare module "callable-instance" {
     ): PickProperties<I> & ExtractFuncFromInterface<I, P>;
     makeCallable<I extends BaseInterface>(
       object: I
-    ): PickProperties<I> & ExtractFuncFromInterface<I, SCALL>;
+    ): PickProperties<I> & ExtractFuncFromInterface<I, typeof CALL>;
 
     clone<C extends BaseInterface & BaseFunc>(callableObject: C): C;
 
@@ -55,7 +54,7 @@ declare module "callable-instance" {
 
     new <C extends BaseClass | BaseFunc | BaseInterface>(): ExtractFunc<
       C,
-      SCALL
+      typeof CALL
     >;
   }
 
@@ -66,7 +65,7 @@ declare module "callable-instance" {
   export type OverrideCall<S extends BaseClass> = {
     new <
       C extends BaseClass | BaseFunc | BaseInterface,
-      P extends BaseProperty = SCALL
+      P extends BaseProperty = typeof CALL
     >(
       ...args: ConstructorParameters<S>
     ): Omit<PickProperties<InstanceType<S>>, P> & ExtractFunc<C, P>;

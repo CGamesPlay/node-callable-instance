@@ -114,7 +114,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -130,7 +130,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -146,7 +146,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -162,7 +162,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -178,7 +178,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -194,7 +194,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -210,7 +210,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }
@@ -226,7 +226,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.clone accepts only direct instance of Callable. e.g created by Callable.makeCallable or with new Callable()"
+              "Callable.clone accepts only direct instance of Callable"
             ) {
               return true;
             }

@@ -66,7 +66,6 @@ class RepeaterWithInterfaceOverload
   go(arg: string): string;
   go(arg: string | number): string | number {
     return arg;
-    // return arg.repeat(this.count);
   }
 }
 
@@ -208,7 +207,6 @@ describe("Callable With Generic Interface Generic and custom property (TypeScrip
 
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
-    // expectType<typeof RepeaterWithInterfaceOverload>(new RepeaterWithInterfaceOverride());
     expectType<RepeaterWithGenericInterface>(
       new RepeaterWithGenericInterface()
     );

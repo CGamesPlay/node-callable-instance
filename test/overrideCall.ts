@@ -1,7 +1,5 @@
 import { expectType } from "ts-expect";
-import Callable, {
-  OverrideCall,
-} from "callable-instance";
+import Callable, { OverrideCall } from "callable-instance";
 
 class MyClass extends Callable<typeof MyClass> {
   constructor() {

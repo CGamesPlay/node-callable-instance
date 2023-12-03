@@ -25,16 +25,13 @@ function defaultTest(Class, prototypes = []) {
         assert(new Class("msg") instanceof defaultPrototypes[i]);
       }
       for (let i = 0; i !== prototypes.length; i++) {
-        assert(new Class("msg") instanceof defaultPrototypes[i]);
+        assert(new Class("msg") instanceof prototypes[i]);
       }
     });
-    it("it's bind method correctly inherits prototypes", function () {
+    it("it's bind method has only Function prototype(returns instance of Function, not Callable)", function () {
       assert(typeof new Class("msg").bind({}) === "function");
-      const defaultPrototypes = [Object, Function, Callable, Class];
+      const defaultPrototypes = [Object, Function];
       for (let i = 0; i !== defaultPrototypes.length; i++) {
-        assert(new Class("msg").bind({}) instanceof defaultPrototypes[i]);
-      }
-      for (let i = 0; i !== prototypes.length; i++) {
         assert(new Class("msg").bind({}) instanceof defaultPrototypes[i]);
       }
     });
@@ -43,10 +40,6 @@ function defaultTest(Class, prototypes = []) {
       assert(typeof new Class("msg").apply === "function");
       const defaultPrototypes = [Object, Function];
       for (let i = 0; i !== defaultPrototypes.length; i++) {
-        assert(new Class("msg").call instanceof defaultPrototypes[i]);
-        assert(new Class("msg").apply instanceof defaultPrototypes[i]);
-      }
-      for (let i = 0; i !== prototypes.length; i++) {
         assert(new Class("msg").call instanceof defaultPrototypes[i]);
         assert(new Class("msg").apply instanceof defaultPrototypes[i]);
       }
