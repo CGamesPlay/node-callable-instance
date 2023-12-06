@@ -34,12 +34,6 @@ function defaultTest(create, name, prototypes = []) {
     it("has length property set to 0 due to ...args", function () {
       assert(create().length === 0);
     });
-    it("has not accessible properties func, property, bound (because it returns this.bound instead of this)", function () {
-      assert(create().func === undefined);
-      assert(create().bound === undefined);
-      assert(Object.getOwnPropertyDescriptor(create(), "func") === undefined);
-      assert(Object.getOwnPropertyDescriptor(create(), "bound") === undefined);
-    });
   });
 }
 

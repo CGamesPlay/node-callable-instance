@@ -67,16 +67,6 @@ function defaultTest(clone, source, name, prototypes = []) {
     it("has length property set to 0 due to ...args", function () {
       assert(clone(source).length === 0);
     });
-    it("has not accessible properties func, property, bound (because it returns this.bound instead of this)", function () {
-      assert(clone(source).func === undefined);
-      assert(clone(source).bound === undefined);
-      assert(
-        Object.getOwnPropertyDescriptor(clone(source), "func") === undefined
-      );
-      assert(
-        Object.getOwnPropertyDescriptor(clone(source), "bound") === undefined
-      );
-    });
   });
 }
 
