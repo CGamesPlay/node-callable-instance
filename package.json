@@ -38,9 +38,7 @@
     "typescript": "^4.9.4"
   },
   "files": [
-    "index.js",
-    "index.d.ts",
-    "LICENSE",
-    "README.md"
+    "lib/index.js",
+    "lib/index.d.ts"
   ]
 }
