@@ -217,3 +217,60 @@ describe("Callable With Generic Interface Generic and custom property (TypeScrip
     expectType<Object>(new RepeaterWithGenericInterface());
   });
 });
+
+interface IFuncInterface {
+  (arg: "notCallable"): "test";
+  go<G extends unknown>(g: G): G;
+}
+
+class RepeaterWithFuncInterface
+  extends Callable<IFuncInterface, "go">
+{
+  constructor() {
+    super("go");
+  }
+  public count = 23;
+  go(g) {
+    return g;
+  }
+}
+
+describe("Callable With Func Interface Generic", function () {
+  it("is callable", function () {
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithFuncInterface()
+    );
+    new RepeaterWithFuncInterface()("testing");
+    // @ts-expect-error wrong type for method
+    new RepeaterWithFuncInterface()(5).go(5);
+    // Valid propert access.
+    new RepeaterWithFuncInterface().count = 4;
+  });
+
+  it("should not use call signature of interface as type", function () {
+    expectType<(arg: "notCallable") => "test">(
+      // @ts-expect-error wrong type
+      new RepeaterWithFuncInterface()
+    );
+    new RepeaterWithFuncInterface()("testing");
+    // @ts-expect-error wrong type for method
+    new RepeaterWithFuncInterface()(5).go(5);
+    // Valid propert access.
+    new RepeaterWithFuncInterface().count = 4;
+  });
+
+  it("is an object", function () {
+    expectType<RepeaterWithFuncInterface>(
+      new RepeaterWithFuncInterface()
+    );
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithFuncInterface().go
+    );
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithFuncInterface()
+    );
+    expectType<<G extends unknown>(arg: G) => G>(
+      new RepeaterWithFuncInterface().go
+    );
+  });
+});

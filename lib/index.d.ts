@@ -15,19 +15,34 @@ declare module "callable-instance" {
     P extends BaseProperty
   > = I[P] extends BaseFunc ? I[P] : never;
 
+  /**
+   * call signature in interface type e.g {(...args: any): any} is considered function type
+   * call signature in interface type combined with other properties e.g {(...args: any): any, property: any} is considered interface type.
+   */
+  type ExtractFuncFromFuncType<
+    F extends BaseFunc,
+    P extends BaseProperty
+  > = Omit<F, never> extends Record<
+    BaseProperty,
+    never
+  >
+    ? F
+    : ExtractFuncFromInterface<F, P>;
+
   interface CloneFuncFromClass<C extends BaseClass, P extends BaseProperty> {
     /**
      * For TS generics and function overload support use interface or function type for Callable
      */
     (...args: Parameters<InstanceType<C>[P]>): ReturnType<InstanceType<C>[P]>;
   }
+
   type ExtractFunc<
     C extends BaseClass | BaseFunc | BaseInterface,
     P extends BaseProperty
   > = C extends BaseClass
     ? CloneFuncFromClass<C, P>
     : C extends BaseFunc
-    ? C
+    ? ExtractFuncFromFuncType<C, P>
     : C extends BaseInterface
     ? ExtractFuncFromInterface<C, P>
     : never;
