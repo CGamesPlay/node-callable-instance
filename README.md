@@ -97,7 +97,7 @@ const cloned2 = Callable.clone(callableObject);
 // 2nd optional generic is for method name (string | symbol | number) which will be used as type of call signature from 1st generic (defaults to Callable.CALL)
 
 interface IExampleClass {
-  // interface type will provide actual type of the function without limits
+  // interface type will provide actual type of the function without limitations
   [Callable.CALL](arg: string): string
 }
 // implements is optional but advised https://www.typescriptlang.org/docs/handbook/interfaces.html
@@ -145,7 +145,7 @@ It can be used to override call signature in child classes.
 ```typescript
 // Override call has 3 generics but must be written only in one way
 // class Child extends (Parent as OverrideCall<typeof Parent>)<Child, propertyName>
-// 1st generic is Parent
+// 1st generic is Parent. Can be only class.
 // 2nd generic is Child. Can be interface | class | function
 // 3rd optional generic is propertyName can be string | symbol | number. defaults to Callable.CALL
 
