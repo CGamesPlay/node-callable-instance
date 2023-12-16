@@ -1,5 +1,6 @@
 {
   "name": "callable-instance",
+  "sideEffects": false,
   "version": "3.0.0",
   "description": "Instances of classes which are directly callable as functions.",
   "repository": "CGamesPlay/node-callable-instance",
