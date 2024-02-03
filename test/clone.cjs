@@ -74,7 +74,7 @@ defaultTest(cloneCallable, new Callable("test"), "clone of regular callable");
 
 defaultTest(
   cloneCallable,
-  Callable.makeCallable({
+  Callable.from({
     test: "test",
     [Callable.CALL]() {
       return this.test;

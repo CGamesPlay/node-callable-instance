@@ -1,5 +1,5 @@
 import { expectType } from "ts-expect";
-import Callable, { CallableConstructor, OverrideCall } from "callable-instance";
+import Callable, { OverrideCall } from "callable-instance";
 
 // TESTS FOR INTERFACE-TYPE GENERICS
 interface IRepeaterWithInterfaceGeneric {
@@ -42,7 +42,7 @@ describe("Callable With Interface Generic and custom property (TypeScript)", fun
     expectType<RepeaterWithInterfaceGeneric>(
       new RepeaterWithInterfaceGeneric(5)
     );
-    expectType<InstanceType<CallableConstructor>>(
+    expectType<InstanceType<typeof Callable>>(
       new RepeaterWithInterfaceGeneric(5)
     );
     expectType<Function>(new RepeaterWithInterfaceGeneric(5));
@@ -101,7 +101,7 @@ describe("Callable With TS Interface Overload Generic and custom property (TypeS
     expectType<RepeaterWithInterfaceOverload>(
       new RepeaterWithInterfaceOverload(5)
     );
-    expectType<InstanceType<CallableConstructor>>(
+    expectType<InstanceType<typeof Callable>>(
       new RepeaterWithInterfaceOverload(5)
     );
     expectType<Function>(new RepeaterWithInterfaceOverload(5));
@@ -153,7 +153,7 @@ describe("Callable With Interface override Generic and custom property (TypeScri
     expectType<RepeaterWithInterfaceOverride>(
       new RepeaterWithInterfaceOverride()
     );
-    expectType<InstanceType<CallableConstructor>>(
+    expectType<InstanceType<typeof Callable>>(
       new RepeaterWithInterfaceOverride()
     );
     expectType<Function>(new RepeaterWithInterfaceOverride());
@@ -210,7 +210,7 @@ describe("Callable With Generic Interface Generic and custom property (TypeScrip
     expectType<RepeaterWithGenericInterface>(
       new RepeaterWithGenericInterface()
     );
-    expectType<InstanceType<CallableConstructor>>(
+    expectType<InstanceType<typeof Callable>>(
       new RepeaterWithGenericInterface()
     );
     expectType<Function>(new RepeaterWithGenericInterface());
@@ -223,9 +223,7 @@ interface IFuncInterface {
   go<G extends unknown>(g: G): G;
 }
 
-class RepeaterWithFuncInterface
-  extends Callable<IFuncInterface, "go">
-{
+class RepeaterWithFuncInterface extends Callable<IFuncInterface, "go"> {
   constructor() {
     super("go");
   }
@@ -260,9 +258,7 @@ describe("Callable With Func Interface Generic", function () {
   });
 
   it("is an object", function () {
-    expectType<RepeaterWithFuncInterface>(
-      new RepeaterWithFuncInterface()
-    );
+    expectType<RepeaterWithFuncInterface>(new RepeaterWithFuncInterface());
     expectType<<G extends unknown>(arg: G) => G>(
       new RepeaterWithFuncInterface().go
     );

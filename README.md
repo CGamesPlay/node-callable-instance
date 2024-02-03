@@ -49,39 +49,41 @@ class ExampleClassWithCustomMethodName extends Callable {
 ```
 
 ### Other Usage Variant
-In the next example, we will create `callableObject` using Callable.makeCallable.
+In the next example, we will create `callableObject` using Callable.from.
 
 ```javascript
 import Callable from "callable-instance";
-// makeCallable creates new callable object with all the properties from source object
-const callableObject = Callable.makeCallable({
-  test: "test",
-  [Callable.CALL]() {
-    return this.test;
-  },
-});
+// Callable.from creates new callable object with all the properties from source object
+const callableObject = Callable.from( {
+	test: "test",
+	[ Callable.CALL ]() {
+		return this.test;
+	},
+} );
 
-// cloning using spread operator + makeCallable. (spread looses call signature so it is important to call makeCallable again)
-const cloned = Callable.makeCallable({...callableObject});
+// cloning using spread operator + Callable.from. (spread looses call signature so it is important to call Callable.from again)
+const cloned = Callable.from( { ...callableObject } );
 
-// cloning using Callable.clone (accepts only direct instance of Callable. e.g. made with makeCallable)
-const cloned2 = Callable.clone(callableObject);
+// cloning using Callable.clone (accepts only direct instance of Callable. e.g. made with Callable.from)
+const cloned2 = Callable.clone( callableObject );
 ```
 > **_NOTE:_**  Usage of custom method name is also supported.
+
 ```javascript
 import Callable from "callable-instance";
-const callableObject = Callable.makeCallable({
-  test: "test",
-  getTest() {
-    return this.test;
-  },
-}, "getTest"); // second parameter is optional method`s name which will be used when calling object
 
-// but it is important to also provide method name when cloning using spread + makeCallable
-const cloned = Callable.makeCallable({...callableObject}, "getTest");
+const callableObject = Callable.from( {
+	test: "test",
+	getTest() {
+		return this.test;
+	},
+}, "getTest" ); // second parameter is optional method`s name which will be used when calling object
+
+// but it is important to also provide method property when cloning using spread + Callable.from
+const cloned = Callable.from( { ...callableObject }, "getTest" );
 
 // Callable.clone does not have this issue
-const cloned2 = Callable.clone(callableObject);
+const cloned2 = Callable.clone( callableObject );
 ```
 
 ## Typescript

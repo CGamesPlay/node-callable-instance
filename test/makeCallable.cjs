@@ -2,11 +2,11 @@ const assert = require("assert");
 const Callable = require("callable-instance");
 
 function getTitle(name, isDefault) {
-  return `Callable.makeCallable() ${name}${isDefault ? " default" : ""} (cjs)`;
+  return `Callable.from() ${name}${isDefault ? " default" : ""} (cjs)`;
 }
 
 const createRegular = () =>
-  Callable.makeCallable({
+  Callable.from({
     test: "test",
     [Callable.CALL]() {
       return this.test;
@@ -52,8 +52,7 @@ class CallableChild extends Callable {
   }
 }
 
-const createFromCallableChild = () =>
-  Callable.makeCallable(new CallableChild());
+const createFromCallableChild = () => Callable.from(new CallableChild());
 
 class ObjectChild extends Object {
   constructor() {
@@ -64,11 +63,11 @@ class ObjectChild extends Object {
   }
 }
 
-const createFromObjectChild = () => Callable.makeCallable(new ObjectChild());
+const createFromObjectChild = () => Callable.from(new ObjectChild());
 
 describe(
   getTitle(
-    "makeCallable from CallableChild | Array | ObjectChild | null | undefined | Function etc",
+    "Callable.from with CallableChild | Array | ObjectChild | null | undefined | Function argument",
     true
   ),
   function () {
@@ -81,7 +80,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -97,7 +96,7 @@ describe(
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -108,12 +107,12 @@ describe(
       assert(
         (() => {
           try {
-            Callable.makeCallable(null);
+            Callable.from(null);
             return false;
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -124,12 +123,12 @@ describe(
       assert(
         (() => {
           try {
-            Callable.makeCallable(undefined);
+            Callable.from(undefined);
             return false;
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -140,12 +139,12 @@ describe(
       assert(
         (() => {
           try {
-            Callable.makeCallable([]);
+            Callable.from([]);
             return false;
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -156,12 +155,12 @@ describe(
       assert(
         (() => {
           try {
-            Callable.makeCallable(function () {});
+            Callable.from(function () {});
             return false;
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -172,12 +171,12 @@ describe(
       assert(
         (() => {
           try {
-            Callable.makeCallable(23);
+            Callable.from(23);
             return false;
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }
@@ -188,12 +187,12 @@ describe(
       assert(
         (() => {
           try {
-            Callable.makeCallable("123");
+            Callable.from("123");
             return false;
           } catch (e) {
             if (
               e.message ===
-              "Callable.makeCallable accepts only regular object or direct instance of Callable"
+              "Callable.from accepts only regular object or direct instance of Callable"
             ) {
               return true;
             }

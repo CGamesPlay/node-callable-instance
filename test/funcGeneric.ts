@@ -1,5 +1,5 @@
 import { expectType } from "ts-expect";
-import Callable, { CallableConstructor, OverrideCall } from "callable-instance";
+import Callable, { OverrideCall } from "callable-instance";
 
 // TESTS FOR FUNCTION-TYPE GENERICS
 class RepeaterWithFuncGeneric extends Callable<(x: string) => string, "go"> {
@@ -31,9 +31,7 @@ describe("Callable With Func Generic and custom property (TypeScript)", function
 
   it("is an instance of Repeater", function () {
     expectType<RepeaterWithFuncGeneric>(new RepeaterWithFuncGeneric(5));
-    expectType<InstanceType<CallableConstructor>>(
-      new RepeaterWithFuncGeneric(5)
-    );
+    expectType<InstanceType<typeof Callable>>(new RepeaterWithFuncGeneric(5));
     expectType<Function>(new RepeaterWithFuncGeneric(5));
     expectType<Object>(new RepeaterWithFuncGeneric(5));
   });
@@ -83,9 +81,7 @@ describe("Callable With Func overload Generic and custom property (TypeScript)",
 
   it("is an instance of Repeater", function () {
     expectType<RepeaterWithFuncOverload>(new RepeaterWithFuncOverload(5));
-    expectType<InstanceType<CallableConstructor>>(
-      new RepeaterWithFuncOverload(5)
-    );
+    expectType<InstanceType<typeof Callable>>(new RepeaterWithFuncOverload(5));
     expectType<Function>(new RepeaterWithFuncOverload(5));
     expectType<Object>(new RepeaterWithFuncOverload(5));
   });
@@ -123,9 +119,7 @@ describe("Callable With TS Func Override Generic and custom property (TypeScript
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
     expectType<RepeaterWithFuncOverride>(new RepeaterWithFuncOverride());
-    expectType<InstanceType<CallableConstructor>>(
-      new RepeaterWithFuncOverride()
-    );
+    expectType<InstanceType<typeof Callable>>(new RepeaterWithFuncOverride());
     expectType<Function>(new RepeaterWithFuncOverride());
     expectType<Object>(new RepeaterWithFuncOverride());
   });
@@ -170,9 +164,7 @@ describe("Callable With Generic Function Generic and custom property (TypeScript
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
     expectType<RepeaterWithGenericFunc>(new RepeaterWithGenericFunc(23));
-    expectType<InstanceType<CallableConstructor>>(
-      new RepeaterWithGenericFunc(23)
-    );
+    expectType<InstanceType<typeof Callable>>(new RepeaterWithGenericFunc(23));
     expectType<Function>(new RepeaterWithGenericFunc(23));
     expectType<Object>(new RepeaterWithGenericFunc(23));
   });
