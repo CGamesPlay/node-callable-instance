@@ -38,13 +38,13 @@ test();
 
 ```javascript
 class ExampleClassWithCustomMethodName extends Callable {
-    constructor(){
-        // in super provide object method`s name which will be used when calling object
-        super('myMethod')
-    }
-    myMethod(arg){
-        return arg
-    }
+  constructor(){
+    // in super provide object method`s name which will be used when calling object
+    super('myMethod')
+  }
+  myMethod(arg){
+    return arg
+  }
 }
 ```
 
@@ -57,7 +57,7 @@ import Callable from "callable-instance";
 const callableObject = Callable.from( {
 	test: "test",
 	[ Callable.CALL ]() {
-		return this.test;
+	  return this.test;
 	},
 } );
 
@@ -74,9 +74,9 @@ import Callable from "callable-instance";
 
 const callableObject = Callable.from( {
 	test: "test",
-	getTest() {
-		return this.test;
-	},
+  getTest() {
+    return this.test;
+  },
 }, "getTest" ); // second parameter is optional method`s name which will be used when calling object
 
 // but it is important to also provide method property when cloning using spread + Callable.from
@@ -104,24 +104,24 @@ interface IExampleClass {
 }
 // implements is optional but advised https://www.typescriptlang.org/docs/handbook/interfaces.html
 class ExampleClass extends Callable<IExampleClass> implements IExampleClass {
-    constructor(){
-        super()
-    }
-    [Callable.CALL](arg: string){
-        return arg
-    }
+  constructor(){
+    super()
+  }
+  [Callable.CALL](arg: string){
+    return arg
+  }
 }
 ```
 
 2. **Using function type**
 ```typescript
 class ExampleClass extends Callable<(arg: string) => string> {
-    constructor(){
-        super()
-    }
-    [Callable.CALL](arg: string){
-        return arg
-    }
+  constructor(){
+    super()
+  }
+  [Callable.CALL](arg: string){
+    return arg
+  }
 }
 ```
 
@@ -129,12 +129,12 @@ class ExampleClass extends Callable<(arg: string) => string> {
 ```typescript
 // easiest way for typing Callable
 class ExampleClass extends Callable<typeof ExampleClass> {
-    constructor(){
-        super()
-    }
-    [Callable.CALL](arg: string){
-        return arg
-    }
+  constructor(){
+    super()
+  }
+  [Callable.CALL](arg: string){
+    return arg
+  }
 }
 ```
 > **_NOTE:_**  For function overload or generics use Interface or Function variant.
