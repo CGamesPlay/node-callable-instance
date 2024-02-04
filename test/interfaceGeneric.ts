@@ -42,9 +42,7 @@ describe("Callable With Interface Generic and custom property (TypeScript)", fun
     expectType<RepeaterWithInterfaceGeneric>(
       new RepeaterWithInterfaceGeneric(5)
     );
-    expectType<InstanceType<typeof Callable>>(
-      new RepeaterWithInterfaceGeneric(5)
-    );
+    expectType<Callable>(new RepeaterWithInterfaceGeneric(5));
     expectType<Function>(new RepeaterWithInterfaceGeneric(5));
     expectType<Object>(new RepeaterWithInterfaceGeneric(5));
   });
@@ -101,9 +99,7 @@ describe("Callable With TS Interface Overload Generic and custom property (TypeS
     expectType<RepeaterWithInterfaceOverload>(
       new RepeaterWithInterfaceOverload(5)
     );
-    expectType<InstanceType<typeof Callable>>(
-      new RepeaterWithInterfaceOverload(5)
-    );
+    expectType<Callable>(new RepeaterWithInterfaceOverload(5));
     expectType<Function>(new RepeaterWithInterfaceOverload(5));
     expectType<Object>(new RepeaterWithInterfaceOverload(5));
   });
@@ -153,9 +149,7 @@ describe("Callable With Interface override Generic and custom property (TypeScri
     expectType<RepeaterWithInterfaceOverride>(
       new RepeaterWithInterfaceOverride()
     );
-    expectType<InstanceType<typeof Callable>>(
-      new RepeaterWithInterfaceOverride()
-    );
+    expectType<Callable>(new RepeaterWithInterfaceOverride());
     expectType<Function>(new RepeaterWithInterfaceOverride());
     expectType<Object>(new RepeaterWithInterfaceOverride());
   });
@@ -210,9 +204,7 @@ describe("Callable With Generic Interface Generic and custom property (TypeScrip
     expectType<RepeaterWithGenericInterface>(
       new RepeaterWithGenericInterface()
     );
-    expectType<InstanceType<typeof Callable>>(
-      new RepeaterWithGenericInterface()
-    );
+    expectType<Callable>(new RepeaterWithGenericInterface());
     expectType<Function>(new RepeaterWithGenericInterface());
     expectType<Object>(new RepeaterWithGenericInterface());
   });

@@ -2,7 +2,6 @@ import { expectType } from "ts-expect";
 import Callable, { OverrideCall } from "callable-instance";
 
 // TESTS FOR CLASS-TYPE GENERICS
-
 class RepeaterWithClassGeneric extends Callable<
   typeof RepeaterWithClassGeneric,
   "go"
@@ -35,7 +34,7 @@ describe("Callable With Class Generic and custom property (TypeScript)", functio
 
   it("is an instance of Repeater", function () {
     expectType<RepeaterWithClassGeneric>(new RepeaterWithClassGeneric(5));
-    expectType<InstanceType<typeof Callable>>(new RepeaterWithClassGeneric(5));
+    expectType<Callable>(new RepeaterWithClassGeneric(5));
     expectType<Function>(new RepeaterWithClassGeneric(5));
     expectType<Object>(new RepeaterWithClassGeneric(5));
   });
@@ -73,7 +72,7 @@ describe("Callable With Class Override Generic and custom property (TypeScript)"
   it("is an instance of Repeater", function () {
     // is not passed because for typescript OverrideCall is other class
     expectType<RepeaterWithClassOverride>(new RepeaterWithClassOverride());
-    expectType<InstanceType<typeof Callable>>(new RepeaterWithClassOverride());
+    expectType<Callable>(new RepeaterWithClassOverride());
     expectType<Function>(new RepeaterWithClassOverride());
     expectType<Object>(new RepeaterWithClassOverride());
   });

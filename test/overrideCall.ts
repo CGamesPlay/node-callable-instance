@@ -36,7 +36,7 @@ class Extended extends (MyClass as OverrideCall<typeof MyClass>)<
   public newPublicProperty = "public";
   public readonly newReadonlyProperty = "readonly" as const;
 
-  [Callable.CALL]() {
+  private [Callable.CALL]() {
     return "str";
   }
 }

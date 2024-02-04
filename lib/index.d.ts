@@ -16,6 +16,7 @@ type ExtractFuncFromInterface<
 
 /**
  * call signature in interface type e.g {(...args: any): any} is considered function type
+ *
  * call signature in interface type combined with other properties e.g {(...args: any): any, property: any} is considered interface type.
  */
 type ExtractFuncFromFuncType<F extends BaseFunc, P extends BaseProperty> = Omit<
@@ -30,6 +31,7 @@ interface CloneFuncFromClass<C extends BaseClass, P extends BaseProperty> {
    * For TS generics and function overload support use interface or function type for Callable
    */
   (...args: Parameters<InstanceType<C>[P]>): ReturnType<InstanceType<C>[P]>;
+  prototype: any;
 }
 
 type ExtractFunc<
@@ -72,11 +74,15 @@ interface CallableConstructor {
     C,
     typeof CALL
   >;
+
+  readonly prototype: Callable;
 }
 
 export = Callable;
 
 declare const Callable: CallableConstructor;
+
+interface Callable extends Function {}
 
 declare namespace Callable {
   export type OverrideCall<S extends BaseClass> = {
