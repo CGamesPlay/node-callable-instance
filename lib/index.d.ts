@@ -31,7 +31,6 @@ interface CloneFuncFromClass<C extends BaseClass, P extends BaseProperty> {
    * For TS generics and function overload support use interface or function type for Callable
    */
   (...args: Parameters<InstanceType<C>[P]>): ReturnType<InstanceType<C>[P]>;
-  prototype: any;
 }
 
 declare const CALLABLE_TS_KEY: unique symbol;
