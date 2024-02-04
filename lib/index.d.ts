@@ -34,15 +34,17 @@ interface CloneFuncFromClass<C extends BaseClass, P extends BaseProperty> {
   prototype: any;
 }
 
+declare const CALLABLE_TS_KEY: unique symbol;
+
 type ExtractFunc<
   C extends BaseClass | BaseFunc | BaseInterface,
   P extends BaseProperty
 > = C extends BaseClass
-  ? CloneFuncFromClass<C, P>
+  ? CloneFuncFromClass<C, P> & { [CALLABLE_TS_KEY]: never }
   : C extends BaseFunc
-  ? ExtractFuncFromFuncType<C, P>
+  ? ExtractFuncFromFuncType<C, P> & { [CALLABLE_TS_KEY]: never }
   : C extends BaseInterface
-  ? ExtractFuncFromInterface<C, P>
+  ? ExtractFuncFromInterface<C, P> & { [CALLABLE_TS_KEY]: never }
   : never;
 
 type PickProperties<Obj extends Record<BaseProperty, unknown>> = {
@@ -82,7 +84,12 @@ export = Callable;
 
 declare const Callable: CallableConstructor;
 
-interface Callable extends Function {}
+interface Callable extends Function {
+  /**
+   * Forcing typescript to distinguish Function and Callable types
+   */
+  [CALLABLE_TS_KEY]: never;
+}
 
 declare namespace Callable {
   export type OverrideCall<S extends BaseClass> = {
