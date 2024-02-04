@@ -55,10 +55,10 @@ In the next example, we will create `callableObject` using Callable.from.
 import Callable from "callable-instance";
 // Callable.from creates new callable object with all the properties from source object
 const callableObject = Callable.from( {
-	test: "test",
-	[ Callable.CALL ]() {
-	  return this.test;
-	},
+  test: "test",
+  [ Callable.CALL ]() {
+    return this.test;
+  },
 } );
 
 // cloning using spread operator + Callable.from. (spread looses call signature so it is important to call Callable.from again)
@@ -73,7 +73,7 @@ const cloned2 = Callable.clone( callableObject );
 import Callable from "callable-instance";
 
 const callableObject = Callable.from( {
-	test: "test",
+  test: "test",
   getTest() {
     return this.test;
   },
